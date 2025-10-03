@@ -76,7 +76,7 @@ export class LstCountry extends HTMLElement {
       btn.addEventListener("click", async (e) => {
         const id = e.target.dataset.id;
 
-        if (confirm("¿Seguro que quieres eliminar este país?")) {
+        if (confirm("¿Seguro que quieres eliminar este país? Se eliminarán también las regiones asociadas. Si deseas conservar las regiones, primero cámbiales el país.")) {
           const resp = await deleteInfo("countries", id);
           if (resp.ok) {
             this.loadData();
