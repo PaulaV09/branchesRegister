@@ -1,4 +1,5 @@
 import { getInfo } from "../../../api/crudApi.js";
+import { deleteInfo } from "../../../api/crudApi.js";
 export class LstCountry extends HTMLElement {
   constructor() {
     super();
@@ -16,10 +17,6 @@ export class LstCountry extends HTMLElement {
 
   render() {
     this.innerHTML = /* html */ `
-      <style rel="stylesheet">
-        @import "./App/Components/country/countryStyle.css";
-      </style>
-
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Countries</h3>
         <button type="button" class="btn btn-primary" id="btnAddCountry">Añadir nuevo Country</button>
@@ -44,8 +41,8 @@ export class LstCountry extends HTMLElement {
                       <th scope="row">${c.id}</th>
                       <td>${c.name}</td>
                       <td>
-                        <button class="btn btn-outline-primary btn-sm">Editar</button>
-                        <button class="btn btn-outline-danger btn-sm">Eliminar</button>
+                        <button class="btn btn-outline-primary btn-sm btnEdit" data-id="${c.id}">Editar</button>
+                        <button class="btn btn-outline-danger btn-sm btnDelete" data-id="${c.id}">Eliminar</button>
                       </td>
                     </tr>
                   `
@@ -74,6 +71,40 @@ export class LstCountry extends HTMLElement {
         });
       });
     }
+
+    this.querySelectorAll(".btnDelete").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        const id = e.target.dataset.id;
+
+        if (confirm("¿Seguro que quieres eliminar este país?")) {
+          const resp = await deleteInfo("countries", id);
+          if (resp.ok) {
+            this.loadData();
+          } else {
+            alert("Error eliminando el país");
+          }
+        }
+      });
+    });
+
+    this.querySelectorAll(".btnEdit").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const id = e.target.dataset.id;
+        const country = this.countries.find((c) => c.id == id);
+
+        this.innerHTML = `<edit-country></edit-country>`;
+        const editForm = this.querySelector("edit-country");
+        editForm.data = country;
+
+        editForm.addEventListener("country-updated", () => {
+          this.loadData(); 
+        });
+
+        editForm.addEventListener("cancel-edit", () => {
+          this.render(); 
+        });
+      });
+    });
   }
 }
 
