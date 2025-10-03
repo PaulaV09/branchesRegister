@@ -1,0 +1,114 @@
+{
+  "countries": [
+    {
+      "name": "Colombia",
+      "id": 1
+    },
+    {
+      "name": "Venezuela",
+      "id": 2
+    },
+    {
+      "name": "Brasil",
+      "id": 3
+    },
+    {
+      "name": "España",
+      "id": 4
+    }
+  ],
+  "regions": [
+    {
+      "name": "Andina",
+      "countryId": "1",
+      "id": 1
+    },
+    {
+      "name": "xxxx",
+      "countryId": "1",
+      "id": 2
+    },
+    {
+      "name": "xxxxxxx",
+      "countryId": "2",
+      "id": 3
+    },
+    {
+      "name": "sdsdsds",
+      "countryId": "3",
+      "id": 4
+    },
+    {
+      "name": "cvbdfsd",
+      "countryId": "4",
+      "id": 5
+    }
+  ],
+  "cities": [
+    {
+      "name": "Buenos Aires",
+      "regionId": "1",
+      "id": 1
+    },
+    {
+      "name": "asdvafrv",
+      "regionId": "2",
+      "id": 2
+    },
+    {
+      "name": "asdvdvsd",
+      "regionId": "3",
+      "id": 3
+    },
+    {
+      "name": "asdveWEQ",
+      "regionId": "4",
+      "id": 4
+    },
+    {
+      "name": "guikmfhj",
+      "regionId": "5",
+      "id": 5
+    }
+  ],
+  "companies": [
+    {
+      "name": "Paula Andrea Viviescas Jaimes",
+      "niu": "452718",
+      "address": "Calle 1NE #5-66",
+      "email": "paulaajaiimes09@gmail.com",
+      "cityId": "1",
+      "id": 1
+    },
+    {
+      "name": "Paula Andrea",
+      "niu": "452718",
+      "address": "Calle 1NE #5-66",
+      "email": "paulaajaiimes09@gmail.com",
+      "cityId": "4",
+      "id": 2
+    }
+  ],
+  "branches": [
+    {
+      "numberComercial": "13335",
+      "address": "Hartzog Road",
+      "email": "paulaajaiimes09@gmail.com",
+      "contactName": "Paula A Viviescas",
+      "phone": "3054329093",
+      "companyId": "1",
+      "cityId": "1",
+      "id": 1
+    },
+    {
+      "numberComercial": "43557",
+      "address": "Calle 1NE #5-66",
+      "email": "wviviescasacevedo@hotmail.com",
+      "contactName": "Wilson Viviescas Acevedo",
+      "phone": "3185436876",
+      "companyId": "2",
+      "cityId": "5",
+      "id": 2
+    }
+  ]
+}
