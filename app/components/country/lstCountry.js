@@ -1,5 +1,4 @@
 import { getInfo } from "../../../api/crudApi.js";
-
 export class LstCountry extends HTMLElement {
   constructor() {
     super();
@@ -59,12 +58,20 @@ export class LstCountry extends HTMLElement {
       }
     `;
 
-    // Evento para el botón de añadir
     const btnAdd = this.querySelector("#btnAddCountry");
     if (btnAdd) {
       btnAdd.addEventListener("click", () => {
-        alert("Aquí abriremos el formulario para añadir un nuevo país");
-        // 👆 Más adelante lo conectamos al form real
+        this.innerHTML = `<reg-country></reg-country>`;
+
+        const regForm = this.querySelector("reg-country");
+
+        regForm.addEventListener("country-added", (e) => {
+          this.loadData();
+        });
+
+        regForm.addEventListener("cancel-country", () => {
+          this.render();
+        });
       });
     }
   }
