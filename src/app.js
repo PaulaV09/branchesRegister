@@ -1,0 +1,16 @@
+import "../app/components/navbar/navMenu.js";
+import "../app/components/country/lstCountry.js";
+import "../app/components/country/regCountry.js";
+import "../app/components/country/editCountry.js";
+import "../app/components/region/lstRegion.js";
+import "../app/components/region/regRegion.js";
+import "../app/components/region/editRegion.js";
+import "../app/components/city/lstCity.js";
+import "../app/components/city/regCity.js";
+import "../app/components/city/editCity.js";
+import "../app/components/company/lstCompany.js";
+import "../app/components/company/regCompany.js";
+import "../app/components/company/editCompany.js";
+import "../app/components/branch/lstBranch.js";
+import "../app/components/branch/regBranch.js";
+import "../app/components/branch/editBranch.js";
