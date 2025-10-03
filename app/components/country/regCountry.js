@@ -12,9 +12,6 @@ export class RegCountry extends HTMLElement {
 
   render() {
     this.innerHTML = /* html */ `
-      <style rel="stylesheet">
-        @import "./App/Components/country/countryStyle.css";
-      </style>
       <div class="card mt-3">
         <div class="card-header">
           Registro de Country <span class="badge rounded-pill text-bg-primary" id="idView"></span>
