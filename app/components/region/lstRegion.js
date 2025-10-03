@@ -17,11 +17,16 @@ export class LstRegion extends HTMLElement {
     this.render();
   }
 
+  getCountryName(id) {
+    const country = this.countries.find((c) => c.id == id);
+    return country ? country.name : "N/A";
+  }
+
   render() {
     this.innerHTML = /* html */ `
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Regions</h3>
-        <button type="button" class="btn btn-primary" id="btnAddRegion">Añadir nueva Region</button>
+        <button type="button" class="btn btn-primary" id="btnAddRegion">Añadir nueva Región</button>
       </div>
 
       ${
@@ -31,27 +36,26 @@ export class LstRegion extends HTMLElement {
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Country</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">País</th>
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 ${this.regions
-                  .map((r) => {
-                    const country = this.countries.find((c) => c.id == r.countryId);
-                    return `
-                      <tr>
-                        <th scope="row">${r.id}</th>
-                        <td>${r.name}</td>
-                        <td>${country ? country.name : "N/A"}</td>
-                        <td>
-                          <button class="btn btn-outline-primary btn-sm btnEdit" data-id="${r.id}">Editar</button>
-                          <button class="btn btn-outline-danger btn-sm btnDelete" data-id="${r.id}">Eliminar</button>
-                        </td>
-                      </tr>
-                    `;
-                  })
+                  .map(
+                    (r) => `
+                    <tr>
+                      <th scope="row">${r.id}</th>
+                      <td>${r.name}</td>
+                      <td>${this.getCountryName(r.countryId)}</td>
+                      <td>
+                        <button class="btn btn-outline-primary btn-sm btnEdit" data-id="${r.id}">Editar</button>
+                        <button class="btn btn-outline-danger btn-sm btnDelete" data-id="${r.id}">Eliminar</button>
+                      </td>
+                    </tr>
+                  `
+                  )
                   .join("")}
               </tbody>
             </table>
@@ -60,7 +64,6 @@ export class LstRegion extends HTMLElement {
       }
     `;
 
-    // Evento Añadir
     const btnAdd = this.querySelector("#btnAddRegion");
     if (btnAdd) {
       btnAdd.addEventListener("click", () => {
@@ -80,6 +83,7 @@ export class LstRegion extends HTMLElement {
     this.querySelectorAll(".btnDelete").forEach((btn) => {
       btn.addEventListener("click", async (e) => {
         const id = e.target.dataset.id;
+
         if (confirm("¿Seguro que quieres eliminar esta región? Se eliminarán también las ciudades asociadas. Si deseas conservar las ciudades, primero cámbiales la región.")) {
           const resp = await deleteInfo("regions", id);
           if (resp.ok) {
@@ -98,7 +102,7 @@ export class LstRegion extends HTMLElement {
 
         this.innerHTML = `<edit-region></edit-region>`;
         const editForm = this.querySelector("edit-region");
-        editForm.data = { ...region, countries: this.countries };
+        editForm.data = { region, countries: this.countries };
 
         editForm.addEventListener("region-updated", () => {
           this.loadData();

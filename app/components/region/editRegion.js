@@ -7,8 +7,12 @@ export class EditRegion extends HTMLElement {
     this.countries = [];
   }
 
-  set data({ id, name, countryId, countries }) {
-    this.region = { id, name, countryId };
+  connectedCallback() {
+    this.render();
+  }
+
+  set data({ region, countries }) {
+    this.region = region;
     this.countries = countries;
     this.render();
   }
@@ -55,10 +59,11 @@ export class EditRegion extends HTMLElement {
       }
 
       const resp = await patchInfo("regions", this.region.id, { name, countryId });
+
       if (resp.ok) {
         this.dispatchEvent(new CustomEvent("region-updated"));
       } else {
-        alert("Error al actualizar región");
+        alert("Error al actualizar la región");
       }
     });
 
